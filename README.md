@@ -1,4 +1,6 @@
-# bootcamp-project-vue
+# Bootcamp Project
+
+![Project Architecture](images/bootcamp-project-arch.png)
 
 ## Project setup
 ```

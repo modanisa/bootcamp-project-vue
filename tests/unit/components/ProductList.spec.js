@@ -1,8 +1,12 @@
-import {mount} from '@vue/test-utils'
+import {createLocalVue, mount, shallowMount} from '@vue/test-utils'
 import ProductList from "@/components/ProductList";
 import ProductListItem from "@/components/ProductListItem";
 import API from "@/api";
 import flushPromises from "flush-promises";
+import Vuex from "vuex";
+import FavoriteCounter from "@/components/FavoriteCounter";
+import router from "@/router";
+import {getters, state} from "@/store";
 
 jest.mock('@/api')
 
@@ -34,6 +38,7 @@ describe("ProductList.vue", () => {
         ]
         API.getProductList.mockResolvedValue(mockResponse)
         const wrapper = mount(ProductList)
+        wrapper.vm.isFavoriteProduct = jest.fn()
 
         await flushPromises()
         const productItemComponents = wrapper.findAllComponents(ProductListItem)

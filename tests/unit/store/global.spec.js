@@ -36,15 +36,27 @@ describe('actions tests', () => {
         "image": "https://fns.modanisa.com/r/pro2/2020/10/05/n-inci-sal--siyah--sal-evi-1809885-1809885-1.jpg"
     }
     it('when a product selected as favorite', () => {
-        let commit = jest.fn()
-        actions.onFavoriteStatusChanged({ commit }, product, true)
-        expect(commit).toHaveBeenCalled()
-        expect(commit).toHaveBeenCalledWith('addFavoriteProduct', product)
+        let context = {
+            commit: jest.fn()
+        }
+        let payload = {
+            product,
+            isFavorite: true
+        }
+        actions.onFavoriteStatusChanged(context, payload)
+        expect(context.commit).toHaveBeenCalled()
+        expect(context.commit).toHaveBeenCalledWith('addFavoriteProduct', product)
     })
     it('when a product removed from favorite', () => {
-        let commit = jest.fn()
-        actions.onFavoriteStatusChanged({commit}, product, false)
-        expect(commit).toHaveBeenCalled()
-        expect(commit).toHaveBeenCalledWith('removeFavoriteProduct', product)
+        let context = {
+            commit: jest.fn()
+        }
+        let payload = {
+            product,
+            isFavorite: false
+        }
+        actions.onFavoriteStatusChanged(context, payload)
+        expect(context.commit).toHaveBeenCalled()
+        expect(context.commit).toHaveBeenCalledWith('removeFavoriteProduct', product)
     })
 })

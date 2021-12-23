@@ -17,6 +17,7 @@
 export default {
   name: "ProductListItem",
   props: {
+    isFavorite: Boolean,
     product: {
       id: Number,
       name: String,
@@ -26,7 +27,7 @@ export default {
   },
   data() {
     return {
-      favoriteProduct: false
+      favoriteProduct: this.isFavorite
     }
   },
   computed: {

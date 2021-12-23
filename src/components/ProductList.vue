@@ -3,6 +3,7 @@
     <div class="product-list-container"
          v-for="product of products" :key="product.id">
       <ProductListItem
+          :isFavorite="isFavoriteProduct(product)"
           :product="product"
           class="product-list-item"/>
     </div>
@@ -19,6 +20,12 @@ export default {
   data() {
     return {
       products: []
+    }
+  },
+  methods: {
+    isFavoriteProduct(product) {
+      const favoriteProducts = this.$store.getters.getFavoriteProducts
+      return favoriteProducts.findIndex(favorite => favorite.id === product.id) !== -1
     }
   },
   async created() {

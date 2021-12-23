@@ -1,10 +1,15 @@
 <template>
-  <h1>dummy</h1>
+  <pre>{{ favoriteProducts }}</pre>
 </template>
 
 <script>
 export default {
-  name: "FavoriteList"
+  name: "FavoriteList",
+  computed: {
+    favoriteProducts() {
+      return this.$store.state.favoriteProducts;
+    }
+  },
 }
 </script>
 

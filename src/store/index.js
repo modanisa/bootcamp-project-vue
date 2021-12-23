@@ -8,6 +8,7 @@ export const state = {
 }
 
 export const getters = {
+    getFavoriteProducts: state => state.favoriteProducts,
     getFavoriteProductCount: state => state.favoriteProducts.length
 }
 
@@ -25,7 +26,7 @@ export const mutations = {
 
 export const actions = {
     onFavoriteStatusChanged(context, payload) {
-        const { product, isFavorite } = payload
+        const {product, isFavorite} = payload
         if (isFavorite) {
             context.commit('addFavoriteProduct', product)
         } else {

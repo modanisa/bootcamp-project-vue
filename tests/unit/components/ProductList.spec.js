@@ -1,4 +1,4 @@
-import {mount, shallowMount} from '@vue/test-utils'
+import {mount} from '@vue/test-utils'
 import ProductList from "@/components/ProductList";
 import ProductListItem from "@/components/ProductListItem";
 import API from "@/api";
@@ -7,7 +7,7 @@ import flushPromises from "flush-promises";
 jest.mock('@/api')
 
 describe("ProductList.vue", () => {
-    it("should component exists", async () => {
+    it("should component exists",  () => {
         const wrapper = mount(ProductList)
         expect(wrapper.exists()).toBeTruthy()
     })
@@ -34,8 +34,8 @@ describe("ProductList.vue", () => {
         ]
         API.getProductList.mockResolvedValue(mockResponse)
         const wrapper = mount(ProductList)
-        await flushPromises()
 
+        await flushPromises()
         const productItemComponents = wrapper.findAllComponents(ProductListItem)
         expect(productItemComponents).toHaveLength(mockResponse.length)
 

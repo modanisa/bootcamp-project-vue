@@ -42,7 +42,7 @@ describe("ProductListItem.vue", () => {
             {
                 caseName: 'when product selected as favorite',
                 initialFavoriteProductValue: false,
-                expectedStyle: { 'background-color': 'gray' }
+                expectedStyle: {'background-color': 'gray'}
             }
         ]
         for (let testCase of testCases) {
@@ -56,7 +56,7 @@ describe("ProductListItem.vue", () => {
         }
     })
     it('render product prop correctly', () => {
-        const product =  {
+        const product = {
             "id": 1,
             "name": "Tesettür Dünyası",
             "description": "Desenli Mevlana Elbise TSD4414 Turuncu",
@@ -73,17 +73,33 @@ describe("ProductListItem.vue", () => {
         expect(wrapper.find("#summary").text()).toContain(product.description)
     })
     it("check favoriteToggle functionality", () => {
+        const product = {
+            "id": 1,
+            "name": "Tesettür Dünyası",
+            "description": "Desenli Mevlana Elbise TSD4414 Turuncu",
+            "image": "https://fns.modanisa.com/r/pro2/2021/11/01/n-desenli-mevlana-elbise-tsd4414-turuncu-8067476-7.jpg"
+        }
+
+        let dispatch = jest.fn()
+
         const localThis = {
-            favoriteProduct: false
+            product,
+            favoriteProduct: false,
+            $store: {
+                dispatch
+            }
         }
 
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeTruthy()
+        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', { product: localThis.product, isFavorite: true})
 
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeFalsy()
+        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', { product: localThis.product, isFavorite: false})
 
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeTruthy()
+        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', { product: localThis.product, isFavorite: true})
     })
 })

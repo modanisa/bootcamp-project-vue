@@ -7,8 +7,8 @@
     <img id="image"
          :src="product.image"
          alt="Product Image">
-    <p id="title">{{product.name}}</p>
-    <p id="summary">{{product.description}}</p>
+    <p id="title">{{ product.name }}</p>
+    <p id="summary">{{ product.description }}</p>
     <button id="detail">Go to Detail</button>
   </div>
 </template>
@@ -39,6 +39,10 @@ export default {
   methods: {
     favoriteToggle() {
       this.favoriteProduct = !this.favoriteProduct
+      this.$store.dispatch('onFavoriteStatusChanged', {
+        product: this.product,
+        isFavorite: this.favoriteProduct,
+      })
     }
   }
 }
@@ -47,14 +51,17 @@ export default {
 <style scoped>
 .product-list-item-container {
 }
+
 #favorite {
   float: right;
 }
+
 #image {
   width: 100%;
   display: inline-block;
   background-size: cover;
 }
+
 #detail {
   width: 100%;
   font-size: 18px;

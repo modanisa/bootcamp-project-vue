@@ -4,7 +4,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export const state = {
-    favoriteProducts: []
+    favoriteProducts: [],
+    searchText: ''
 }
 
 export const getters = {
@@ -21,6 +22,9 @@ export const mutations = {
         if (index !== -1) {
             state.favoriteProducts.splice(index, 1)
         }
+    },
+    setSearchText(state, text) {
+        state.searchText = text
     }
 }
 
@@ -32,6 +36,10 @@ export const actions = {
         } else {
             context.commit('removeFavoriteProduct', product)
         }
+    },
+    onSearchTextChanged(context, payload) {
+        const {text} = payload
+        context.commit('setSearchText', text)
     }
 }
 

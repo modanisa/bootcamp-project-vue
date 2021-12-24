@@ -1,10 +1,25 @@
 <template>
-  <input id="searchbar" type="text" placeholder="Search..." />
+  <input id="searchbar"
+         v-model="text"
+         type="text" placeholder="Search..." />
 </template>
 
 <script>
 export default {
-  name: "SearchBar"
+  name: "SearchBar",
+  data() {
+    return {
+      text: ''
+    }
+  },
+  watch: {
+    text: 'onTextChange'
+  },
+  methods: {
+    onTextChange(newVal, oldVal) {
+      this.$store.dispatch('onSearchTextChanged', { text: newVal })
+    }
+  }
 }
 </script>
 

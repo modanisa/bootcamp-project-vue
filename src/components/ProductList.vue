@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="product-list-container"
-         v-for="product of products" :key="product.id">
+         v-for="product of filteredProducts" :key="product.id">
       <ProductListItem
           :isFavorite="isFavoriteProduct(product)"
           :product="product"
@@ -19,13 +19,21 @@ export default {
   components: {ProductListItem},
   data() {
     return {
-      products: []
+      products: [],
     }
   },
   methods: {
     isFavoriteProduct(product) {
       const favoriteProducts = this.$store.getters.getFavoriteProducts
       return favoriteProducts.findIndex(favorite => favorite.id === product.id) !== -1
+    }
+  },
+  computed: {
+    filteredProducts() {
+      const text = this.$store.state.searchText.toLowerCase()
+      return this.products
+          .map(product => ({ ...product, search: (product.name + " " + product.description).toLowerCase() }))
+          .filter(pr => pr.search.includes(text))
     }
   },
   async created() {

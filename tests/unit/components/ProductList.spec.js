@@ -11,7 +11,7 @@ import {getters, state} from "@/store";
 jest.mock('@/api')
 
 describe("ProductList.vue", () => {
-    it("should component exists",  () => {
+    it("should component exists", () => {
         const wrapper = mount(ProductList)
         expect(wrapper.exists()).toBeTruthy()
     })
@@ -48,5 +48,46 @@ describe("ProductList.vue", () => {
         for (let i in wrapperArr) {
             expect(wrapperArr[i].props('product')).toStrictEqual(mockResponse[i])
         }
+    })
+    it("should filter product list by searched text correctly", () => {
+        let products = [
+            {
+                "id": 1,
+                "name": "Tesettür Dünyası",
+                "description": "Desenli Mevlana Elbise TSD4414 Turuncu",
+                "image": "https://fns.modanisa.com/r/pro2/2021/11/01/n-desenli-mevlana-elbise-tsd4414-turuncu-8067476-7.jpg",
+            },
+            {
+                "id": 7,
+                "name": "Refka",
+                "description": "Kapüşonlu Triko Yelek - Antrasit - Refka Basic",
+                "image": "https://fns.modanisa.com/r/pro2/2021/06/07/n-kapusonlu-kolsuz-triko-hirka--antrasit--refka-basic-8003772-7.jpg",
+            },
+            {
+                "id": 9,
+                "name": "Sweatshirt",
+                "description": "Kapüşonlu Baskılı",
+                "image": "https://fns.modanisa.com/r/pro2/2021/11/05/n-kapusonlu-baskili-sweatshirt-8142878-8142878-1.jpg",
+            }
+        ]
+
+        const localThis = {
+            products,
+            $store: {
+                state: {
+                    searchText: 'el'
+                }
+            }
+        }
+
+        const filteredProducts = ProductList.computed.filteredProducts.call(localThis)
+        products.splice(products.length - 1, 1)
+
+        expect(filteredProducts).toHaveLength(products.length)
+
+        filteredProducts.forEach(fPro => {
+            delete fPro.search
+        })
+        expect(filteredProducts).toStrictEqual(products)
     })
 })

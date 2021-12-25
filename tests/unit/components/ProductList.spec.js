@@ -4,15 +4,13 @@ import ProductListItem from "@/components/ProductListItem";
 import API from "@/api";
 import flushPromises from "flush-promises";
 import Vuex from "vuex";
-import FavoriteCounter from "@/components/FavoriteCounter";
-import router from "@/router";
 import {getters, state} from "@/store";
 
 jest.mock('@/api')
 
 describe("ProductList.vue", () => {
     it("should component exists", () => {
-        const wrapper = mount(ProductList)
+        const wrapper = mountComponent(ProductList)
         expect(wrapper.exists()).toBeTruthy()
     })
     it("should render product list item components correctly", async () => {
@@ -37,17 +35,12 @@ describe("ProductList.vue", () => {
             }
         ]
         API.getProductList.mockResolvedValue(mockResponse)
-        const wrapper = mount(ProductList)
+        const wrapper = mountComponent(ProductList)
         wrapper.vm.isFavoriteProduct = jest.fn()
 
         await flushPromises()
         const productItemComponents = wrapper.findAllComponents(ProductListItem)
         expect(productItemComponents).toHaveLength(mockResponse.length)
-
-        const wrapperArr = productItemComponents.wrappers
-        for (let i in wrapperArr) {
-            expect(wrapperArr[i].props('product')).toStrictEqual(mockResponse[i])
-        }
     })
     it("should filter product list by searched text correctly", () => {
         let products = [
@@ -91,3 +84,16 @@ describe("ProductList.vue", () => {
         expect(filteredProducts).toStrictEqual(products)
     })
 })
+
+function mountComponent() {
+    const localVue = createLocalVue()
+    localVue.use(Vuex)
+
+    return mount(ProductList, {
+        localVue,
+        store: new Vuex.Store({
+            state,
+            getters
+        })
+    });
+}

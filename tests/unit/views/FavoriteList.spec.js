@@ -4,6 +4,12 @@ import Vuex from "vuex";
 import {getters, state} from "@/store";
 
 describe("FavoriteList.vue", () => {
+    it('sanity test', () => {
+        return
+    })
+    it('sanity test v2', () => {
+        expect(true).toBeTruthy()
+    })
     it("should component exists", () => {
         const wrapper = mountComponent()
         expect(wrapper.exists()).toBeTruthy()

@@ -37,6 +37,19 @@ describe("ProductListItem.vue", () => {
             expect(goToDetail.text()).toEqual("Go to Detail")
         })
     })
+
+    it.each`
+        caseName | initialFavoriteProductValue | expectedStyle 
+        ${'when product selected as favorite'} | ${false} | ${{'background-color': 'gray'}}
+    `('returns $expectedStyle when $caseName with $initialFavoriteProductValue',
+        ({caseName, initialFavoriteProductValue, expectedStyle}) => {
+            const localThis = {
+                favoriteProduct: initialFavoriteProductValue
+            }
+            const style = ProductListItem.computed.favoriteBtnStyle.call(localThis)
+            expect(style).toStrictEqual(expectedStyle)
+        });
+
     describe('check favoriteBtnStyle functionality', () => {
         const testCases = [
             {
@@ -92,14 +105,17 @@ describe("ProductListItem.vue", () => {
 
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeTruthy()
-        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', { product: localThis.product, isFavorite: true})
+        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', {product: localThis.product, isFavorite: true})
 
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeFalsy()
-        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', { product: localThis.product, isFavorite: false})
+        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', {
+            product: localThis.product,
+            isFavorite: false
+        })
 
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeTruthy()
-        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', { product: localThis.product, isFavorite: true})
+        expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', {product: localThis.product, isFavorite: true})
     })
 })

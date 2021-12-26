@@ -18,4 +18,8 @@ describe("Header.vue", () => {
         const favoriteCounter = wrapper.findComponent(FavoriteCounter)
         expect(favoriteCounter.exists()).toBeTruthy()
     })
+    it("renders header correctly", () => {
+        const wrapper = shallowMount(Header)
+        expect(wrapper.element).toMatchSnapshot()
+    })
 })

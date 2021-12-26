@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header.vue renders header correctly 1`] = `
+<div
+  class="header-container"
+>
+  <searchbar-stub
+    style="width: 50%;"
+  />
+   
+  <favoritecounter-stub />
+</div>
+`;

@@ -18,7 +18,7 @@ describe("FavoriteCounter.vue", () => {
     it("should favorite count text exist and match", () => {
         const wrapper = mountComponent()
         const textContainer = wrapper.find('p')
-        expect(textContainer.text()).toContain("Favoriteler: ")
+        expect(textContainer.text()).toContain("Favorites: ")
     })
 })
 

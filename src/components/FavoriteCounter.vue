@@ -1,6 +1,6 @@
 <template>
   <p>
-    <router-link :to="{name: 'FavoriteList'}">Favoriteler: <span>{{favoriteProductCount}}</span></router-link>
+    <router-link :to="{name: 'FavoriteList'}">Favorites: <span>{{favoriteProductCount}}</span></router-link>
   </p>
 </template>
 

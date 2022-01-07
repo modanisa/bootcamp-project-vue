@@ -1,4 +1,4 @@
-import {createLocalVue, mount, shallowMount} from '@vue/test-utils'
+import {createLocalVue, mount} from '@vue/test-utils'
 import ProductList from "@/components/ProductList";
 import ProductListItem from "@/components/ProductListItem";
 import API from "@/api";
@@ -10,6 +10,7 @@ jest.mock('@/api')
 
 describe("ProductList.vue", () => {
     it("should component exists", () => {
+        API.getProductList.mockResolvedValue([])
         const wrapper = mountComponent(ProductList)
         expect(wrapper.exists()).toBeTruthy()
     })

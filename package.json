@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "test:pact": "vue-cli-service test:unit pacts/"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -16,12 +17,14 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@pact-foundation/pact": "^9.17.2",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/test-utils": "^1.0.3",
+    "jest-pact": "^0.9.1",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

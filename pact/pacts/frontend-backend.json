@@ -1,0 +1,57 @@
+{
+  "consumer": {
+    "name": "Frontend"
+  },
+  "provider": {
+    "name": "Backend"
+  },
+  "interactions": [
+    {
+      "description": "a request not empty for product list",
+      "providerState": "get product list successfully",
+      "request": {
+        "method": "GET",
+        "path": "/products"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=UTF-8"
+        },
+        "body": [
+          {
+            "id": 1,
+            "name": "tavin",
+            "description": "tavin marka kıyafet",
+            "image": "https://fns.modanisa.com/r/pro2/2021/11/01/n-desenli-mevlana-elbise-tsd4414-turuncu-8067476-7.jpg"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          },
+          "$.body[*].id": {
+            "match": "type"
+          },
+          "$.body[*].name": {
+            "match": "type"
+          },
+          "$.body[*].description": {
+            "match": "type"
+          },
+          "$.body[*].image": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="product-list-container"
-         v-for="product of filteredProducts" :key="product.id">
+         v-for="product of filteredProducts"
+         :key="product.id">
       <ProductListItem
+          class="product-list-item"
+          :data-slug="product.slug"
           :isFavorite="isFavoriteProduct(product)"
           :product="product"
-          class="product-list-item"/>
+          />
     </div>
   </div>
 </template>
@@ -39,6 +42,8 @@ export default {
   async created() {
     try {
       this.products = await API.getProductList()
+      this.products =  this.products.map(product => ({ ...product, slug: 'mervin-sal' }))
+      console.table(this.products)
     } catch (e) {
       console.error(e)
     }

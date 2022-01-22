@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import ProductDetail from "@/views/ProductDetail";
 
 Vue.use(VueRouter)
 
@@ -10,9 +11,9 @@ const routes = [
     component: () => import('@/views/Layout')
   },
   {
-    path: '/favorite-list',
-    name: 'FavoriteList',
-    component: () => import('@/views/FavoriteList')
+    path: '/:slug',
+    name: 'ProductDetail',
+    component: () => import('@/views/ProductDetail'),
   }
 ]
 

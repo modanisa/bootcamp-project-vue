@@ -9,7 +9,7 @@
          alt="Product Image">
     <p id="title">{{ product.name }}</p>
     <p id="summary">{{ product.description }}</p>
-    <button id="detail">Go to Detail</button>
+    <button id="detail" @click="goToDetail">Go to Detail</button>
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
       name: String,
       description: String,
       image: String,
+      slug: String,
     }
   },
   data() {
@@ -44,6 +45,9 @@ export default {
         product: this.product,
         isFavorite: this.favoriteProduct,
       })
+    },
+    goToDetail() {
+      this.$router.push("/" + this.product.slug)
     }
   }
 }

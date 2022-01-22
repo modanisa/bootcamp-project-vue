@@ -1,4 +1,4 @@
-import {mount} from '@vue/test-utils'
+import {createLocalVue, mount, shallowMount} from '@vue/test-utils'
 import ProductListItem from "@/components/ProductListItem";
 
 describe("ProductListItem.vue", () => {
@@ -117,5 +117,34 @@ describe("ProductListItem.vue", () => {
         ProductListItem.methods.favoriteToggle.call(localThis)
         expect(localThis.favoriteProduct).toBeTruthy()
         expect(dispatch).toHaveBeenCalledWith('onFavoriteStatusChanged', {product: localThis.product, isFavorite: true})
+    })
+
+    test('when user click detail button should navigate to product detail', async () => {
+        const goToDetailSpy = jest.spyOn(ProductListItem.methods, 'goToDetail')
+
+        let product = {
+            "id": 2,
+            "name": "Mervin Şal",
+            "description": "Paşmina Desenli Şal - Karışık Renkli - Mervin Şal",
+            "image": "https://fns.modanisa.com/r/pro2/2018/07/25/n-pasmina-desenli-sal--karisik-renkli--mervin-sal-516070-516070-2.jpg",
+            "slug": "mervin-sal",
+        }
+        let routerPushMock = jest.fn()
+
+        const wrapper = shallowMount(ProductListItem, {
+            propsData: {
+                product
+            },
+            mocks: {
+                $router: {
+                    push: routerPushMock
+                }
+            }
+        })
+
+        const button = wrapper.find("#detail")
+        await button.trigger('click')
+
+        expect(routerPushMock).toHaveBeenCalledWith("/" + product.slug)
     })
 })

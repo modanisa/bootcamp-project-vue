@@ -11,10 +11,15 @@ const routes = [
     component: () => import('@/views/Layout')
   },
   {
+    path: '/favorites',
+    name: 'Favorites',
+    component: () => import('@/views/FavoritePage')
+  },
+  {
     path: '/:slug',
     name: 'ProductDetail',
     component: () => import('@/views/ProductDetail'),
-  }
+  },
 ]
 
 const router = new VueRouter({

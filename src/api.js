@@ -1,5 +1,6 @@
 import axios from 'axios'
 import adapter from "axios/lib/adapters/http";
+
 axios.defaults.adapter = adapter;
 
 export class API {
@@ -21,9 +22,17 @@ export class API {
     }
 
     async getProductList() {
-        return axios.
-            get(this.withPath('/products')).
-            then(r => r.data)
+        return axios.get(this.withPath('/products')).then(r => r.data)
+    }
+
+    async getProductBySlug(slug) {
+        return Promise.resolve({
+            "id": 2,
+            "name": "Mervin Şal",
+            "slug": "mervin-sal",
+            "description": "Paşmina Desenli Şal - Karışık Renkli - Mervin Şal",
+            "image": "https://fns.modanisa.com/r/pro2/2018/07/25/n-pasmina-desenli-sal--karisik-renkli--mervin-sal-516070-516070-2.jpg"
+        })
     }
 }
 

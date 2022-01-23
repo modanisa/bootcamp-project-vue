@@ -1,14 +1,16 @@
 <template>
   <div class="header-container">
     <SearchBar style="width: 50%" />
+    <FavoriteSection />
   </div>
 </template>
 
 <script>
 import SearchBar from "@/components/SearchBar";
+import FavoriteSection from "@/components/FavoriteSection";
 export default {
   name: "Header",
-  components: {SearchBar}
+  components: {FavoriteSection, SearchBar}
 }
 </script>
 

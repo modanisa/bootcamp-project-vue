@@ -43,7 +43,6 @@ export default {
     try {
       this.products = await API.getProductList()
       this.products =  this.products.map(product => ({ ...product, slug: 'mervin-sal' }))
-      console.table(this.products)
     } catch (e) {
       console.error(e)
     }

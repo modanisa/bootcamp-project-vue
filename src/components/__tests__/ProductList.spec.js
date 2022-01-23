@@ -93,8 +93,8 @@ function mountComponent() {
     return mount(ProductList, {
         localVue,
         store: new Vuex.Store({
-            state,
-            getters
+            state: { ...state },
+            getters: { ...getters }
         })
     });
 }

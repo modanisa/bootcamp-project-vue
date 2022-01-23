@@ -25,6 +25,9 @@ export const mutations = {
     },
     setSearchText(state, text) {
         state.searchText = text
+    },
+    clearAllFavorites(state) {
+        state.favoriteProducts = []
     }
 }
 
@@ -40,6 +43,9 @@ export const actions = {
     onSearchTextChanged(context, payload) {
         const {text} = payload
         context.commit('setSearchText', text)
+    },
+    clearAllFavorites(context, payload) {
+        context.commit('clearAllFavorites')
     }
 }
 

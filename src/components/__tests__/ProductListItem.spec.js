@@ -145,6 +145,7 @@ describe("ProductListItem.vue", () => {
         const button = wrapper.find("#detail")
         await button.trigger('click')
 
+        expect(goToDetailSpy).toBeCalled()
         expect(routerPushMock).toHaveBeenCalledWith("/" + product.slug)
     })
 })

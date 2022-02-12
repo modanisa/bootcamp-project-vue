@@ -10,16 +10,15 @@ pactWith({
     describe("products", () => {
         let api
         beforeEach(() => {
-            api = new API(provider.mockService.baseUrl)
+            api = new API(provider.mockService.baseUrl, false)
         })
         test('get product list', async () => {
-            console.log(provider)
             await provider.addInteraction({
                 state: 'get product list successfully',
                 uponReceiving: 'a request not empty for product list',
                 withRequest: {
                     method: 'GET',
-                    path: '/products',
+                    path: '/api/v1/products',
                 },
                 willRespondWith: {
                     status: 200,
@@ -29,6 +28,7 @@ pactWith({
                     body: eachLike({
                         id: integer(1),
                         name: like("tavin"),
+                        slug: like("tavin"),
                         description: like('tavin marka kıyafet'),
                         image: like('https://fns.modanisa.com/r/pro2/2021/11/01/n-desenli-mevlana-elbise-tsd4414-turuncu-8067476-7.jpg')
                     })

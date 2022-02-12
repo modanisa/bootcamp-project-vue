@@ -8,6 +8,6 @@ exports[`Header.vue renders header correctly 1`] = `
     style="width: 50%;"
   />
    
-  <favoritecounter-stub />
+  <favoritesection-stub />
 </div>
 `;

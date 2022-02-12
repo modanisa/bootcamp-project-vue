@@ -11,7 +11,7 @@
       "providerState": "get product list successfully",
       "request": {
         "method": "GET",
-        "path": "/products"
+        "path": "/api/v1/products"
       },
       "response": {
         "status": 200,
@@ -22,6 +22,7 @@
           {
             "id": 1,
             "name": "tavin",
+            "slug": "tavin",
             "description": "tavin marka kıyafet",
             "image": "https://fns.modanisa.com/r/pro2/2021/11/01/n-desenli-mevlana-elbise-tsd4414-turuncu-8067476-7.jpg"
           }
@@ -37,6 +38,9 @@
             "match": "type"
           },
           "$.body[*].name": {
+            "match": "type"
+          },
+          "$.body[*].slug": {
             "match": "type"
           },
           "$.body[*].description": {
